@@ -1,8 +1,10 @@
+import { HeaderPrivate } from "./components/layouts/private/HeaderPrivate"
+
 function App() {
 
   return (
     <>
-      <h1>Frontend Red Social</h1>
+      <HeaderPrivate />
     </>
   )
 }
