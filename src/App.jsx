@@ -1,10 +1,12 @@
-import { HeaderPrivate } from "./components/layouts/private/HeaderPrivate"
+/* import { HeaderPrivate } from "./components/layouts/private/HeaderPrivate" */
+import { HeaderPublic } from "./components/layouts/public/HeaderPublic"
 
 function App() {
 
   return (
     <>
-      <HeaderPrivate />
+      {/* <HeaderPrivate /> */}
+      <HeaderPublic />
     </>
   )
 }
