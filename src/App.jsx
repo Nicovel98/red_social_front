@@ -1,13 +1,13 @@
 /* import { HeaderPrivate } from "./components/layouts/private/HeaderPrivate" */
-import { HeaderPublic } from "./components/layouts/public/HeaderPublic"
+import { Routing } from "./router/Routing"
 
 function App() {
 
   return (
-    <>
+    <div className="layout">
       {/* <HeaderPrivate /> */}
-      <HeaderPublic />
-    </>
+      <Routing />
+    </div>
   )
 }
 
