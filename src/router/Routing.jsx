@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PublicLayout } from "../components/layouts/public/PublicLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
+import { PrivateLayout } from "../components/layouts/private/PrivateLayout";
+import { Feed } from "../components/publication/Feed";
 
 export const Routing = () => {
     return (
@@ -15,7 +17,11 @@ export const Routing = () => {
                 </Route>
                 {/* Cargar comoponentes de la ruta privada */}
                 <Route>
-
+                    {/* Cargar componentes de la ruta pública */}
+                    <Route path="/rsocial" element={<PrivateLayout />}>
+                        <Route index element={<Feed />} />
+                        <Route path='feed' element={<Feed />} />
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>
