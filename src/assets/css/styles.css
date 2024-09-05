@@ -64,6 +64,9 @@ body {
     max-height: 80rem;
 }
 
+.layout.error {
+    grid-template-columns: 100% !important;
+}
 
 /*ESTILOS NAVBAR*/
 .layout__navbar {

@@ -4,6 +4,7 @@ import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
 import { PrivateLayout } from "../components/layouts/private/PrivateLayout";
 import { Feed } from "../components/publication/Feed";
+import { Error404 } from "../components/layouts/Error404";
 
 export const Routing = () => {
     return (
@@ -23,6 +24,8 @@ export const Routing = () => {
                         <Route path='feed' element={<Feed />} />
                     </Route>
                 </Route>
+                {/* Configurar la ruta para la página de error 404 */}
+                <Route path="*" element={<Error404 />} />
             </Routes>
         </BrowserRouter>
     )
