@@ -1,6 +1,10 @@
 import avatar from '../../assets/img/default_user.png';
+import useAuth from "../../hooks/useAuth";
 
 export const Feed = () => {
+
+    const { share } = useAuth();
+    console.log(share);
 
     return (
         <>
@@ -10,143 +14,99 @@ export const Feed = () => {
             </header>
 
             <div className="content__posts">
-
                 <div className="posts__post">
-
                     <div className="post__container">
-
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
                                 <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
-
                         <div className="post__body">
-
                             <div className="post__user-info">
                                 <a href="#" className="user-info__name">Inés Oliveros</a>
                                 <span className="user-info__divider"> | </span>
                                 <a href="#" className="user-info__create-date">Hace 1 hora</a>
                             </div>
-
                             <h4 className="post__content">Hola, buenos días.</h4>
-
                         </div>
-
                     </div>
 
-
                     <div className="post__buttons">
-
                         <a href="#" className="post__button">
                             <i className="fa-solid fa-trash-can"></i>
                         </a>
-
                     </div>
-
                 </div>
 
                 <div className="posts__post">
-
                     <div className="post__container">
-
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
                                 <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
-
                         <div className="post__body">
-
                             <div className="post__user-info">
                                 <a href="#" className="user-info__name">Inés Oliveros</a>
                                 <span className="user-info__divider"> | </span>
                                 <a href="#" className="user-info__create-date">Hace 1 hora</a>
                             </div>
-
                             <h4 className="post__content">Hola, buenos días.</h4>
-
                         </div>
                     </div>
 
                     <div className="post__buttons">
-
                         <a href="#" className="post__button">
                             <i className="fa-solid fa-trash-can"></i>
                         </a>
-
                     </div>
-
                 </div>
 
-
                 <div className="posts__post">
-
                     <div className="post__container">
-
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
                                 <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
-
                         <div className="post__body">
-
                             <div className="post__user-info">
                                 <a href="#" className="user-info__name">Inés Oliveros</a>
                                 <span className="user-info__divider"> | </span>
                                 <a href="#" className="user-info__create-date">Hace 1 hora</a>
                             </div>
-
                             <h4 className="post__content">Hola, buenos días.</h4>
-
                         </div>
                     </div>
-
                     <div className="post__buttons">
-
                         <a href="#" className="post__button">
                             <i className="fa-solid fa-trash-can"></i>
                         </a>
-
                     </div>
-
                 </div>
-
                 <div className="posts__post">
-
                     <div className="post__container">
-
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
                                 <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
-
                         <div className="post__body">
-
                             <div className="post__user-info">
                                 <a href="#" className="user-info__name">Inés Oliveros</a>
                                 <span className="user-info__divider"> | </span>
                                 <a href="#" className="user-info__create-date">Hace 1 hora</a>
                             </div>
-
                             <h4 className="post__content">Hola, buenos días.</h4>
-
                         </div>
                     </div>
 
                     <div className="post__buttons">
-
                         <a href="#" className="post__button">
                             <i className="fa-solid fa-trash-can"></i>
                         </a>
-
                     </div>
-
                 </div>
-
-
             </div>
 
             <div className="content__container-btn">

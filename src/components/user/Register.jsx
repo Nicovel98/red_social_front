@@ -39,7 +39,7 @@ export const Register = () => {
 
             // Mostrar modal de éxito
             Swal.fire({
-                title: '¡Usuario registrado correctamente!',
+                title: data.message,
                 icon: 'success',
                 confirmButtonText: 'Continuar',
             }).then(() => {
@@ -52,7 +52,7 @@ export const Register = () => {
 
             // Mostrar modal de error
             Swal.fire({
-                title: '¡El usuario no se ha registrado!',
+                title: data.message,
                 icon: 'error',
                 confirmButtonText: 'Intentar nuevamente',
             });
