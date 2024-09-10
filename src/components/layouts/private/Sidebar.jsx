@@ -1,12 +1,16 @@
 import avatar from '../../../assets/img/default_user.png';
+import useAuth from "../../../hooks/useAuth";
 
 export const Sidebar = () => {
+
+    const { auth } = useAuth();
+    console.log(auth);
 
     return (
         <aside className="layout__aside">
 
             <header className="aside__header">
-                <h1 className="aside__title">Hola, Inés María </h1>
+                <h1 className="aside__title">Hola, {auth.name} </h1>
             </header>
 
             <div className="aside__container">
@@ -19,8 +23,8 @@ export const Sidebar = () => {
                         </div>
 
                         <div className="general-info__container-names">
-                            <a href="#" className="container-names__name"> Inés María Oliveros </a>
-                            <p className="container-names__nickname"> Nick </p>
+                            <a href="#" className="container-names__name"> {auth.name + " " + auth.last_name} </a>
+                            <p className="container-names__nickname"> {"@" + auth.nickname} </p>
                         </div>
                     </div>
 
