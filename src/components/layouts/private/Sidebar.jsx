@@ -1,4 +1,3 @@
-import avatar from '../../../assets/img/default_user.png';
 import { Global } from '../../../helpers/Global';
 import useAuth from "../../../hooks/useAuth";
 
