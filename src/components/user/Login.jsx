@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
-
+import { useNavigate } from "react-router-dom";
+import useAuth from '../../hooks/useAuth';
 
 export const Login = () => {
 
+    // Usamos el hook para redirigir a la página de la red social
+    const navigate = useNavigate();
     // Usamos el hook personalizado useForm para cargar los datos del formulario
     const { form, changed } = useForm({});
     // Estado para validad si el usuario se identificó correctamente con un arreglo
     const [logged, setLogged] = useState(" not logged");
+    // Estado para asignar los valores del token y usuario en el contexto de la aplicación
+    const { setAuth } = useAuth();
 
     const loginUser = async (e) => {
         // Prevenir que se actualice la pantalla
@@ -38,9 +43,13 @@ export const Login = () => {
             // Al iniciar sesión, almacenamos el usuario en el localStorage
             localStorage.setItem("user", JSON.stringify(data.user));
 
-            // Redirigir al usuario a la página principal
-            //window.location.href = "/rsocial";
+            //Asignamos los datos del usuario en el Auth
+            setAuth(data.user);
 
+            // Redirigir al usuario a la página principal
+            setTimeout(() => {
+                navigate('/rsocial');
+            }, 2000);
         } else {
             setLogged("error");
         }

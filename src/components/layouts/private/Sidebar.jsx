@@ -1,4 +1,5 @@
 import avatar from '../../../assets/img/default_user.png';
+import { Global } from '../../../helpers/Global';
 import useAuth from "../../../hooks/useAuth";
 
 export const Sidebar = () => {
@@ -19,7 +20,12 @@ export const Sidebar = () => {
 
                     <div className="profile-info__general-info">
                         <div className="general-info__container-avatar">
-                            <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />
+                            {auth.image != "default_user.png" &&
+                                <img src={Global.url + "user/avatar/" + auth.image}
+                                    className='container-avatar__img' alt='foto de perfil' />}
+                            {auth.image == "default_user.png" &&
+                                <img src={Global.url + "user/avatar/" + auth.image}
+                                    className='container-avatar__img' alt='foto de perfil' />}
                         </div>
 
                         <div className="general-info__container-names">
