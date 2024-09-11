@@ -1,6 +1,9 @@
 import avatar from '../../../assets/img/default_user.png'
+import { Global } from '../../../helpers/Global';
+import useAuth from "../../../hooks/useAuth";
 
 export const NavPrivate = () => {
+    const { auth } = useAuth();
     return (
         <nav className="navbar__container-lists">
 
@@ -30,12 +33,17 @@ export const NavPrivate = () => {
             <ul className="container-lists__list-end">
                 <li className="list-end__item">
                     <div className="img-avatar-nav">
-                        <img src={avatar} className='list-end__img' alt="imagen de perfil" />
+                        {auth.image != "default_user.png" &&
+                            <img src={Global.url + "user/avatar/" + auth.image}
+                                className='container-avatar__img' alt='foto de perfil' />}
+                        {auth.image == "default_user.png" &&
+                            <img src={Global.url + "user/avatar/" + auth.image}
+                                className='container-avatar__img' alt='foto de perfil' />}
                     </div>
                 </li>
                 <li className="list-end__item">
                     <a href="#" className="list-end__link">
-                        <span className="list-end__name">nick</span>
+                        <span className="list-end__name">{"@" + auth.nickname}</span>
                     </a>
                 </li>
                 <li className="list-end__item">
