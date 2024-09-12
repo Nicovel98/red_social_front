@@ -1,10 +1,11 @@
 import { Global } from '../../../helpers/Global';
 import useAuth from "../../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
 
-    const { auth } = useAuth();
-    console.log(auth);
+    const { auth, counters } = useAuth();
+    //console.log(auth);
 
     return (
         <aside className="layout__aside">
@@ -35,24 +36,33 @@ export const Sidebar = () => {
 
                     <div className="profile-info__stats">
                         <div className="stats__following">
-                            <a href="#" className="following__link">
+                            <Link to={"siguiendo/" + auth._id} className="following__link">
                                 <span className="following__title">
                                     Siguiendo</span>
-                                <span className="following__number"> No. Siguiendo </span>
-                            </a>
+                                <span className="following__number">
+                                    {" "}
+                                    {counters.followingCount}{" "}
+                                </span>
+                            </Link>
                         </div>
                         <div className="stats__following">
-                            <a href="#" className="following__link">
+                            <Link to={"seguidores/" + auth._id} className="following__link">
                                 <span className="following__title">Seguidores</span>
-                                <span className="following__number"> No. Seguidores </span>
-                            </a>
+                                <span className="following__number">
+                                    {" "}
+                                    {counters.followedCount}{" "}
+                                </span>
+                            </Link>
                         </div>
 
 
                         <div className="stats__following">
                             <a href="#" className="following__link">
                                 <span className="following__title">Publicaciones</span>
-                                <span className="following__number">  No. publicaciones </span>
+                                <span className="following__number">
+                                    {" "}
+                                    {counters.publicationsCount}{" "}
+                                </span>
                             </a>
                         </div>
 
@@ -60,30 +70,40 @@ export const Sidebar = () => {
                     </div>
                 </div>
 
-
                 <div className="aside__container-form">
-
-                    <form className="container-form__form-post">
-
+                    <form className="container-form__form-post" autoComplete="off">
                         <div className="form-post__inputs">
-                            <label className="form-post__label">¿Qué quieres compartir hoy?</label>
-                            <textarea name="post" className="form-post__textarea"></textarea>
+                            <label className="form-post__label" htmlFor="post">
+                                ¿Qué quieres compartir hoy?
+                            </label>
+                            <textarea
+                                id="post"
+                                name="post"
+                                className="form-post__textarea"
+                            ></textarea>
                         </div>
 
                         <div className="form-post__inputs">
-                            <label className="form-post__label">Sube tu foto</label>
-                            <input type="file" name="image" className="form-post__image" />
+                            <label className="form-post__label" htmlFor="image">
+                                Sube tu foto
+                            </label>
+                            <input
+                                type="file"
+                                id="image"
+                                name="image"
+                                className="form-post__image"
+                            />
                         </div>
 
-                        <input type="submit" value="Enviar" className="form-post__btn-submit" disabled />
-
+                        <input
+                            type="submit"
+                            value="Enviar"
+                            className="form-post__btn-submit"
+                            disabled
+                        />
                     </form>
-
                 </div>
-
             </div>
-
         </aside>
-
-    )
-}
+    );
+};
