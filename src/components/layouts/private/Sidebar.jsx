@@ -9,15 +9,12 @@ export const Sidebar = () => {
 
     return (
         <aside className="layout__aside">
-
             <header className="aside__header">
                 <h1 className="aside__title">Hola, {auth.name} </h1>
             </header>
 
             <div className="aside__container">
-
                 <div className="aside__profile-info">
-
                     <div className="profile-info__general-info">
                         <div className="general-info__container-avatar">
                             {auth.image != "default_user.png" &&
@@ -33,7 +30,6 @@ export const Sidebar = () => {
                             <p className="container-names__nickname"> {"@" + auth.nickname} </p>
                         </div>
                     </div>
-
                     <div className="profile-info__stats">
                         <div className="stats__following">
                             <Link to={"siguiendo/" + auth._id} className="following__link">
@@ -54,8 +50,6 @@ export const Sidebar = () => {
                                 </span>
                             </Link>
                         </div>
-
-
                         <div className="stats__following">
                             <a href="#" className="following__link">
                                 <span className="following__title">Publicaciones</span>
@@ -65,8 +59,6 @@ export const Sidebar = () => {
                                 </span>
                             </a>
                         </div>
-
-
                     </div>
                 </div>
 

@@ -1,35 +1,21 @@
-
 import { Global } from "../../helpers/Global";
 import { useEffect, useState } from 'react';
 import useAuth from "../../hooks/useAuth";
-import { UserList } from "../user/UserList";
-import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { UserList } from './UserList';
 
-
-export const Following = () => {
-
+export const People = () => {
     // Variable para almacenar el token para las peticiones a realizar en este componente
     const token = localStorage.getItem("token");
-
     // Se recibe la información desde el Contexto a través del hook useAuth
     const { auth, setCounters } = useAuth();
-
     // Estado para guardar el array de usuarios que sigues recibido desde el backend
     const [users, setUsers] = useState([]);
-
     // Estado para guardar la página actual y se va actualizando al hacer clic en el botón mostrar más
     const [page, setPage] = useState(1);
-
     // Estado para gestionar la visibilidad del botón "Ver más personas"
     const [more, setMore] = useState(true);
-
     // Estado para verificar si yo sigo a un usuario, para configurar la visualización de los botones "Seguir" y "Dejar de seguir"
     const [following, setFollowing] = useState([]);
-
-    // Usar desde el react-router-dom el Hook useParams para tener acceso a los parámetros que vienen en la url
-    const params = useParams();
-
     // Hook para ejecutar el método getUsers, se ejecuta la primera vez que se carga este componente
     useEffect(() => {
         getUsers(1);
@@ -38,43 +24,42 @@ export const Following = () => {
     // Método para hacer la petición al Backend y obtener los usuarios que sigues
     const getUsers = async (nextPaginate = 1) => {
         try {
-            // Obtener el userId desde la url
-            const userId = params.id;
-
             // Petición al Backend para obtener los usuarios que sigues desde la BD del API Backend - page actualiza la pagina a mostrar
-            const response = await fetch(Global.url + "follow/following/" + userId + "/" + nextPaginate, {
+            // Endpoint en formato Template String
+            const response = await fetch(`${Global.url}user/userlist/${nextPaginate}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + token
                 }
             });
-
             // Obtener la información retornada por la request
             const data = await response.json();
-            console.log(data);
-            // Recorrer y limpiar follows para quedarme con followed
-            let cleanUsers = [];
-            data.follows.forEach(follow => {
-                cleanUsers = [...cleanUsers, follow.followed_user]
-            });
-            data.users = cleanUsers;
-
-            // Usar la variable de estado para asignar el array de usuarios que sigues recibido
+            // Usar la variable de estado para asignar el array de usuarios que sigues recibido. Si la petición es exitosa, actualiza los usuarios
             if (data.users && data.status === "success") {
-                let newUsers = data.users;
-
+                // Filtrar usuarios para excluir al usuario autenticado
+                const filteredUsers = data.users.filter(user => user._id !== auth._id);
+                let newUsers = filteredUsers;
                 if (users.length >= 1) {
-                    newUsers = [...users, ...data.users];
+                    newUsers = [...users, ...filteredUsers];
                 }
                 setUsers(newUsers);
+                // Obtener la lista de usuarios que sigues y actualizar el estado
+                const followResponse = await fetch(`${Global.url}follow/following/${auth._id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    }
+                });
 
-                // Asignamos a la variable de estado following, el array de seguidores que me devolvió el backend
-                setFollowing(data.users_following);
-
+                const followData = await followResponse.json();
+                if (followData.status === "success") {
+                    setFollowing(followData.users_following);
+                }
                 // Paginación. Comprobar si existen más usuarios para mostrar en la respuesta de la petición
                 // (data.totalDocs - 5) porque el listado de usuarios ya tiene 5 usuarios en pantalla que no está contabilizando en user.length
-                if (users.length >= (data.total - 5)) {
+                if (users.length >= (data.totalDocs - 5)) {
                     setMore(false);
                 }
             }
@@ -86,32 +71,19 @@ export const Following = () => {
     return (
         <>
             <header className="content__header">
-                <h1 className="content__title">Usuarios que sigue {auth.name} {auth.last_name} </h1>
+                <h1 className="content__title">Gente</h1>
             </header>
 
-            {/* Si no sigue a ningún usuario, mostrar el mensaje */}
-            {users.length === 0 ? (
-                <div className="no-following-message">
-                    <h3>
-                        Aún no sigues a ningún usuario en la red social, puedes hacer clic en
-                        <strong>
-                            <Link to="/rsocial/gente" className="highlight-gente"> Gente </Link>
-                        </strong>
-                        para ver el listado de usuarios y seguir a quienes te interese.
-                    </h3>
-                </div>
-            ) : (
-                <UserList
-                    users={users}
-                    getUsers={getUsers}
-                    following={following}
-                    setFollowing={setFollowing}
-                    more={more}
-                    page={page}
-                    setPage={setPage}
-                    setCounters={setCounters}
-                />
-            )}
+            <UserList
+                users={users}
+                getUsers={getUsers}
+                following={following || []}
+                setFollowing={setFollowing}
+                more={more}
+                page={page}
+                setPage={setPage}
+                setCounters={setCounters}
+            />
         </>
     );
 }

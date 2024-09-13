@@ -13,12 +13,16 @@ export const useForm = (initialObj = {}) => {
             ...form,
             [name]: value
         });
+    };
 
-    }
+    // Método para resetear el formulario a su estado inicial
+    const resetForm = () => {
+        setForm(initialObj);
+    };
 
     return {
         form,
-        changed
+        changed,
+        resetForm
     }
-
 }

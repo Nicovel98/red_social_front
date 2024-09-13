@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": token
+                "Authorization": "Bearer " + token
             }
         });
 
@@ -81,6 +81,7 @@ export const AuthProvider = ({ children }) => {
 
     // Renderizar el proveedor de contexto con el contexto AuthContext.Provider
     return (
+        // Valores que se comparten a través del contexto
         <AuthContext.Provider value={{
             auth, setAuth, counters, setCounters, loading
         }}>
