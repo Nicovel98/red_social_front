@@ -24,7 +24,7 @@ export const Sidebar = () => {
                                     alt="Foto de perfil"
                                 />
                             )}
-                            {auth.image == "default.png" && (
+                            {auth.image == "default_user.png" && (
                                 <img
                                     src={avatar}
                                     className="container-avatar__img"
