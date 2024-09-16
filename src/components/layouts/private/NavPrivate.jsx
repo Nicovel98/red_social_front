@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { Global } from '../../../helpers/Global';
 import useAuth from "../../../hooks/useAuth";
 import avatar from '../../../assets/img/default_user.png';
 
@@ -35,9 +34,9 @@ export const NavPrivate = () => {
                 <li className="list-end__item">
                     <div className="img-avatar-nav">
                         {auth.image != "default_user.png" &&
-                            <img src={Global.url + "user/avatar/" + auth.image}
+                            <img src={auth.image}
                                 className='container-avatar__img' alt='foto de perfil' />}
-                        {auth.image == "default.png" &&
+                        {auth.image == "default_user.png" &&
                             <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
                     </div>
                 </li>

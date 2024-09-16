@@ -1,6 +1,6 @@
-import { Global } from '../../../helpers/Global';
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import avatar from "../../../assets/img/default_user.png";
 
 export const Sidebar = () => {
 
@@ -17,12 +17,20 @@ export const Sidebar = () => {
                 <div className="aside__profile-info">
                     <div className="profile-info__general-info">
                         <div className="general-info__container-avatar">
-                            {auth.image != "default_user.png" &&
-                                <img src={Global.url + "user/avatar/" + auth.image}
-                                    className='container-avatar__img' alt='foto de perfil' />}
-                            {auth.image == "default_user.png" &&
-                                <img src={Global.url + "user/avatar/" + auth.image}
-                                    className='container-avatar__img' alt='foto de perfil' />}
+                            {auth.image != "default.png" && (
+                                <img
+                                    src={auth.image}
+                                    className="container-avatar__img"
+                                    alt="Foto de perfil"
+                                />
+                            )}
+                            {auth.image == "default.png" && (
+                                <img
+                                    src={avatar}
+                                    className="container-avatar__img"
+                                    alt="Foto de perfil"
+                                />
+                            )}
                         </div>
 
                         <div className="general-info__container-names">
